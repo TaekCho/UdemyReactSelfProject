@@ -1,9 +1,12 @@
+import noteImage from "../assets/no-projects.png";
+
 export default function DefaultPage() {
   return (
-    <>
-      <h2>No Project Selected</h2>
+    <section className="flex flex-col items-center">
+      <img src={noteImage} alt="note-pad-image" className="w-32 h-32" />
+      <h2 className="text-xl font-bold">No Project Selected</h2>
       <div>Select a project or get started with a new one</div>
-      <button className="">Create New Project</button>
-    </>
+      <button className="pd-">Create New Project</button>
+    </section>
   );
 }
