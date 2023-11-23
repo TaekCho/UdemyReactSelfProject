@@ -34,8 +34,6 @@ function App() {
   // set projectList value by making a deep copy
   const [projectList, setProjectList] = useState([...MOCK_DATA]);
 
-  console.log(projectList);
-
   function inputHandler(event) {
     const { id, value } = event.target;
     setProjectInput((prevInput) => ({
