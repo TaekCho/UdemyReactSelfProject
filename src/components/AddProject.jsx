@@ -8,6 +8,7 @@ export default function AddProject({ inputHandler, clickHandlerToAddProject }) {
       <div className="flex gap-2 justify-end">
         <button className="px-6 py-3 text-transform: capitalize">cancel</button>
         <button
+          type="submit"
           className="bg-black text-white px-6 py-3 rounded-lg text-transform: capitalize"
           onClick={clickHandlerToAddProject}
         >

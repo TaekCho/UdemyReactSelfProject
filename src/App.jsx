@@ -19,9 +19,9 @@ function App() {
     },
   ];
   // TESTING TO MAP 'MOCK DATA'
-  MOCK_DATA.map((each) => {
-    console.log(each);
-  });
+  // MOCK_DATA.map((each) => {
+  //   console.log(each);
+  // });
 
   const DEFAULT_DATA = {
     title: "",
@@ -31,12 +31,10 @@ function App() {
 
   const [isAdding, setIsAdding] = useState(false);
   const [projectInput, setProjectInput] = useState({ ...DEFAULT_DATA });
-  const [projectList, setProjectList] = useState([
-    { ...MOCK_DATA[0] },
-    { ...MOCK_DATA[1] },
-  ]);
+  // set projectList value by making a deep copy
+  const [projectList, setProjectList] = useState([...MOCK_DATA]);
 
-  console.log(`ProjectList: ${projectList}`);
+  console.log(projectList);
 
   function inputHandler(event) {
     const { id, value } = event.target;
@@ -50,11 +48,11 @@ function App() {
   function clickHandlerToAddProject(event) {
     setProjectList((prevProjectList) => [
       {
-        title: event.title.value,
-        description: event.description.value,
-        dueDate: event.dueDate.value,
+        title: projectInput.title,
+        description: projectInput.description,
+        dueDate: projectInput.dueDate,
       },
-      ...projectInput,
+      ...prevProjectList,
     ]);
     // empty the project input to receive new data
     setProjectInput({ ...DEFAULT_DATA });

@@ -12,11 +12,13 @@ export default function SideBar({ onAddProject, projectList }) {
       </button>
       <div>
         <ul className="flex flex-col gap-4">
-          {/* {projectList
+          {projectList.length > 0
             ? projectList.map((eachProject, index) => (
-                <li key={index}>{eachProject.title}</li>
+                <li className="text-slate-500 p-4" key={index}>
+                  {eachProject.title}
+                </li>
               ))
-            : undefined} */}
+            : undefined}
         </ul>
       </div>
     </aside>
