@@ -3,6 +3,7 @@ import { useState } from "react";
 import DefaultPage from "./components/DefaultPage";
 import SideBar from "./components/SideBar";
 import AddProject from "./components/AddProject";
+import ProjectInfo from "./components/ProjectInfo";
 
 function App() {
   // array type data
@@ -29,7 +30,7 @@ function App() {
     dueDate: "",
   };
 
-  const [isAdding, setIsAdding] = useState(false);
+  const [showSection, setShowSection] = useState("");
   const [projectInput, setProjectInput] = useState({ ...DEFAULT_DATA });
   // set projectList value by making a deep copy
   const [projectList, setProjectList] = useState([...MOCK_DATA]);
@@ -58,7 +59,7 @@ function App() {
 
   // pop up an input page on the main
   function onAddProject() {
-    setIsAdding((prev) => !prev);
+    setShowSection("addProject");
   }
 
   // console.log(projectList[0][0].title);
@@ -68,14 +69,15 @@ function App() {
       <h1 className="my-4 text-center text-2xl font-bold">🦾</h1>
       <main className="flex flex-wrap">
         <SideBar onAddProject={onAddProject} projectList={projectList} />
-        {!isAdding ? (
-          <DefaultPage />
-        ) : (
+        {showSection === "" && <DefaultPage />}
+        {showSection === "addProject" && <AddProject />}
+        {showSection === "showProject" && <ProjectInfo />}
+        {/* : (
           <AddProject
             inputHandler={inputHandler}
             clickHandler={clickHandlerToAddProject}
           />
-        )}
+        )} */}
       </main>
     </>
   );
