@@ -13,11 +13,13 @@ export default function ProjectInfo({ projectList }) {
       <section>
         <h3>Tasks</h3>
         <div className="flex gap-4">
-          <input type="text" className="w-16" />
+          <input type="text" className="w-16 bg-gray-300" />
           <button>Add Task</button>
         </div>
         {/* if no task, react accordingly */}
         {!tasks && <div>This project does not have any tasks yet.</div>}
+        {/* if there are, show them in order */}
+        {tasks && }
       </section>
     </>
   );
