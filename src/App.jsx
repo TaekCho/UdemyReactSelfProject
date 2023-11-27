@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import DefaultPage from "./components/DefaultPage";
 import SideBar from "./components/SideBar";
@@ -12,11 +12,21 @@ function App() {
       title: "Title_1",
       description: "default_description",
       dueDate: "default_date",
+      tasks: [
+        "Practice, practice!",
+        "Learn advanced concepts",
+        "Learn the basics",
+      ],
     },
     {
-      title: "Title_2",
+      title: "Learning React",
       description: "second_default_description",
-      dueDate: "second_default_date",
+      dueDate: "Dec 29, 2024",
+      tasks: [
+        "Practice, practice!",
+        "Learn advanced concepts",
+        "Learn the basics",
+      ],
     },
   ];
   // TESTING TO MAP 'MOCK DATA'
@@ -28,6 +38,7 @@ function App() {
     title: "",
     description: "",
     dueDate: "",
+    tasks: [],
   };
 
   const [showSection, setShowSection] = useState("");
@@ -50,6 +61,7 @@ function App() {
         title: projectInput.title,
         description: projectInput.description,
         dueDate: projectInput.dueDate,
+        tasks: projectInput.tasks,
       },
       ...prevProjectList,
     ]);
@@ -62,16 +74,30 @@ function App() {
     setShowSection("addProject");
   }
 
+  function onShowProject() {
+    setShowSection("showProject");
+  }
+
   // console.log(projectList[0][0].title);
 
   return (
     <>
       <h1 className="my-4 text-center text-2xl font-bold">🦾</h1>
-      <main className="flex flex-wrap">
-        <SideBar onAddProject={onAddProject} projectList={projectList} />
-        {showSection === "" && <DefaultPage />}
-        {showSection === "addProject" && <AddProject />}
+      <main className="flex flex-wrap h-screen">
+        <SideBar
+          onAddProject={onAddProject}
+          projectList={projectList}
+          showProject={onShowProject}
+        />
+        {projectList.length === 0 && <DefaultPage />}
+        {showSection === "addProject" && (
+          <AddProject
+            inputHandler={inputHandler}
+            clickHandlerToAddProject={clickHandlerToAddProject}
+          />
+        )}
         {showSection === "showProject" && <ProjectInfo />}
+        <ProjectInfo projectList={projectList[1]} />
         {/* : (
           <AddProject
             inputHandler={inputHandler}

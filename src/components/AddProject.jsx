@@ -1,11 +1,15 @@
 import Input from "./Input";
 
-export default function AddProject({ inputHandler, clickHandlerToAddProject }) {
+export default function AddProject({
+  inputHandler,
+  clickHandlerToAddProject,
+  projectList,
+}) {
   let todayDate = new Date().toISOString().split("T")[0];
 
   return (
-    <form className="w-2/4 m-16">
-      <div className="flex gap-2 justify-end">
+    <form className="w-2/4 m-16" name="addProject">
+      <menu className="flex gap-2 justify-end">
         <button className="px-6 py-3 text-transform: capitalize">cancel</button>
         <button
           type="submit"
@@ -14,23 +18,27 @@ export default function AddProject({ inputHandler, clickHandlerToAddProject }) {
         >
           save
         </button>
-      </div>
-      <h3 className="text-transform: uppercase">title</h3>
-      <Input type="text" id="title" onChange={inputHandler} />
-      <h3 className="text-transform: uppercase">description</h3>
-      <textarea
-        id="description"
-        type="text-area"
-        className="w-full mb-2 bg-slate-200 border-2 border-b-stone-300 focus:border:none focus:border-b-stone-600"
+      </menu>
+      <Input
+        textarea={false}
+        label="title"
+        id="title"
+        type="text"
         onChange={inputHandler}
       />
-      <h3 className="text-transform: uppercase">due date</h3>
       <Input
+        textarea={true}
+        label="description"
+        id="description"
+        onChange={inputHandler}
+      />
+      <Input
+        textarea={false}
+        label="Due Date"
         type="date"
         id="dueDate"
         onChange={inputHandler}
         min={todayDate}
-        max="2050-12-31"
       />
     </form>
   );
