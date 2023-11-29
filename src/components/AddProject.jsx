@@ -10,10 +10,12 @@ export default function AddProject({
   return (
     <form className="w-2/4 m-16" name="addProject">
       <menu className="flex gap-2 justify-end">
-        <button className="px-6 py-3 text-transform: capitalize">cancel</button>
+        <button className="px-6 py-3 text-transform: capitalize text-stone-700 hover:text-stone-950">
+          cancel
+        </button>
         <button
           type="submit"
-          className="bg-black text-white px-6 py-3 rounded-lg text-transform: capitalize"
+          className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-3 rounded-lg text-transform: capitalize"
           onClick={clickHandlerToAddProject}
         >
           save

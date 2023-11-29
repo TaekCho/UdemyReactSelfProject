@@ -82,8 +82,8 @@ function App() {
 
   return (
     <>
-      <h1 className="my-4 text-center text-2xl font-bold">🦾</h1>
-      <main className="flex flex-wrap h-screen">
+      {/* <h1 className="my-4 text-center text-2xl font-bold">🦾</h1> */}
+      <main className="flex flex-wrap h-screen mt-16">
         <SideBar
           onAddProject={onAddProject}
           projectList={projectList}
@@ -97,7 +97,10 @@ function App() {
           />
         )}
         {showSection === "showProject" && <ProjectInfo />}
-        <ProjectInfo projectList={projectList[1]} />
+        {/* <ProjectInfo projectList={projectList[1]} /> */}
+
+        <DefaultPage onAddProject={onAddProject} />
+
         {/* : (
           <AddProject
             inputHandler={inputHandler}
