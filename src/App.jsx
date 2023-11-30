@@ -3,110 +3,53 @@ import { useState, useRef } from "react";
 import DefaultPage from "./components/DefaultPage";
 import SideBar from "./components/SideBar";
 import AddProject from "./components/AddProject";
-import ProjectInfo from "./components/ProjectInfo";
 
 function App() {
-  // array type data
-  const MOCK_DATA = [
-    {
-      title: "Title_1",
-      description: "default_description",
-      dueDate: "default_date",
-      tasks: [
-        "Practice, practice!",
-        "Learn advanced concepts",
-        "Learn the basics",
-      ],
-    },
-    {
-      title: "Learning React",
-      description: "second_default_description",
-      dueDate: "Dec 29, 2024",
-      tasks: [
-        "Practice, practice!",
-        "Learn advanced concepts",
-        "Learn the basics",
-      ],
-    },
-  ];
-  // TESTING TO MAP 'MOCK DATA'
-  // MOCK_DATA.map((each) => {
-  //   console.log(each);
-  // });
+  const [projectState, setProjectsState] = useState({
+    selectedProjectId: undefined,
+    projects: [],
+  });
 
-  const DEFAULT_DATA = {
-    title: "",
-    description: "",
-    dueDate: "",
-    tasks: [],
-  };
-
-  const [showSection, setShowSection] = useState("");
-  const [projectInput, setProjectInput] = useState({ ...DEFAULT_DATA });
-  // set projectList value by making a deep copy
-  const [projectList, setProjectList] = useState([...MOCK_DATA]);
-
-  function inputHandler(event) {
-    const { id, value } = event.target;
-    setProjectInput((prevInput) => ({
-      ...prevInput,
-      [id]: value,
-    }));
+  function handleStartAddProject() {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: null,
+      };
+    });
   }
 
-  // add a project to the projectList to render it on the sidebar
-  function clickHandlerToAddProject(event) {
-    setProjectList((prevProjectList) => [
-      {
-        title: projectInput.title,
-        description: projectInput.description,
-        dueDate: projectInput.dueDate,
-        tasks: projectInput.tasks,
-      },
-      ...prevProjectList,
-    ]);
-    // empty the project input to receive new data
-    setProjectInput({ ...DEFAULT_DATA });
+  function handleAddProject(projectData) {
+    setProjectsState((prevState) => {
+      const newProject = {
+        ...projectData,
+        id: Math.random(),
+      };
+
+      return {
+        // update the project without losing the previous data
+        ...prevState,
+        projects: [...prevState.projects, newProject],
+      };
+    });
   }
 
-  // pop up an input page on the main
-  function onAddProject() {
-    setShowSection("addProject");
-  }
+  console.log(projectState);
 
-  function onShowProject() {
-    setShowSection("showProject");
-  }
+  let content;
 
-  // console.log(projectList[0][0].title);
+  if (projectState.selectedProjectId === null) {
+    content = <AddProject onAdd={handleAddProject} />;
+  } else if (projectState.selectedProjectId === undefined) {
+    content = <DefaultPage onStartAddProject={handleStartAddProject} />;
+  }
 
   return (
     <>
       {/* <h1 className="my-4 text-center text-2xl font-bold">🦾</h1> */}
       <main className="flex flex-wrap h-screen mt-16">
-        <SideBar
-          onAddProject={onAddProject}
-          projectList={projectList}
-          showProject={onShowProject}
-        />
-        {projectList.length === 0 && <DefaultPage />}
-        {showSection === "addProject" && (
-          <AddProject
-            inputHandler={inputHandler}
-            clickHandlerToAddProject={clickHandlerToAddProject}
-          />
-        )}
-        {showSection === "showProject" && <ProjectInfo />}
-        {/* <ProjectInfo projectList={projectList[1]} /> */}
-
-        <DefaultPage onAddProject={onAddProject} />
-
-        {/* : (
-          <AddProject
-            inputHandler={inputHandler}
-            clickHandler={clickHandlerToAddProject}
-          />
-        )} */}
+        <SideBar onStartAddProject={handleStartAddProject} />
+        {content}
       </main>
     </>
   );

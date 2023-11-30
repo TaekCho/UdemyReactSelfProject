@@ -1,4 +1,4 @@
-export default function ProjectInfo({ projectList }) {
+export default function ProjectInfo({}) {
   return (
     <section className="w-4/6 max-h-min">
       <div className="flex flex-col p-6 gap-2">

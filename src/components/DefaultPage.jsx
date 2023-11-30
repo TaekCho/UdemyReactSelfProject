@@ -1,7 +1,7 @@
 import noteImage from "../assets/no-projects.png";
 import Button from "./Button";
 
-export default function DefaultPage({ onAddProject }) {
+export default function DefaultPage({ onStartAddProject }) {
   return (
     <section className="mt-24 flex flex-col items-center w-2/3">
       <img
@@ -17,7 +17,7 @@ export default function DefaultPage({ onAddProject }) {
         Select a project or get started with a new one
       </div>
       <div>
-        <Button onAddProject={onAddProject}>+ add project</Button>
+        <Button onClick={onStartAddProject}>+ add project</Button>
       </div>
     </section>
   );

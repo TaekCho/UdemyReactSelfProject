@@ -1,10 +1,24 @@
+import { useRef } from "react";
+
 import Input from "./Input";
 
-export default function AddProject({
-  inputHandler,
-  clickHandlerToAddProject,
-  projectList,
-}) {
+export default function AddProject({ onAdd }) {
+  const title = useRef();
+  const description = useRef();
+  const dueDate = useRef();
+
+  function handleSave() {
+    const enteredTitle = title.current.value;
+    const enteredDescription = description.current.value;
+    const enteredDueDate = dueDate.current.value;
+
+    onAdd({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: enteredDueDate,
+    });
+  }
+
   let todayDate = new Date().toISOString().split("T")[0];
 
   return (
@@ -14,9 +28,8 @@ export default function AddProject({
           cancel
         </button>
         <button
-          type="submit"
           className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-3 rounded-lg text-transform: capitalize"
-          onClick={clickHandlerToAddProject}
+          onClick={handleSave}
         >
           save
         </button>
@@ -26,21 +39,21 @@ export default function AddProject({
         label="title"
         id="title"
         type="text"
-        onChange={inputHandler}
+        ref={title}
       />
       <Input
         textarea={true}
         label="description"
         id="description"
-        onChange={inputHandler}
+        ref={description}
       />
       <Input
         textarea={false}
         label="Due Date"
         type="date"
         id="dueDate"
-        onChange={inputHandler}
         min={todayDate}
+        ref={dueDate}
       />
     </form>
   );
