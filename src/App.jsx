@@ -50,7 +50,10 @@ function App() {
     <>
       {/* <h1 className="my-4 text-center text-2xl font-bold">🦾</h1> */}
       <main className="flex flex-wrap h-screen mt-16">
-        <SideBar onStartAddProject={handleStartAddProject} />
+        <SideBar
+          onStartAddProject={handleStartAddProject}
+          projects={projectState.projects}
+        />
         {content}
       </main>
     </>
